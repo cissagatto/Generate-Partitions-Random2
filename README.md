@@ -1,4 +1,4 @@
-# Generate Random Partitions version 1
+# Generate Random Partitions version 2
 This code is part of my PhD at PPG-CC/DC/UFSCar. The aim is generate random partitions for multilabel classification
 
 The figure bellow shows the fluxogram for this code:
@@ -35,7 +35,7 @@ Confirms if the folder UTILS contains the following files: Clus.jar, R_csv_2_arf
 
 NOTE: Please, pay attention to the *datasets-hpmlk.csv* names and the names in the CSV file. They must be the same, on the contrary, an error may occur.
 
-## GPR1 Folder Strucutre
+## GPR2 Folder Strucutre
 
 <img src="https://github.com/cissagatto/Generate-Partitions-Kohonen/blob/main/folder_strcutre_gpkh.png" width="300">
 
