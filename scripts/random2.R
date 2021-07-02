@@ -111,12 +111,12 @@ cat("\nGPR1 \t nome: ", dataset_name)
 
 ##################################################################################################
 # DON'T RUN -- it's only for test the code
-#ds <- datasets[29,]
-#dataset_name = ds$Name
-#number_dataset = ds$Id
-#number_cores = 10
-#number_folds = 10
-#folderResults = "/dev/shm/res"
+# ds <- datasets[17,]
+# dataset_name = ds$Name
+# number_dataset = ds$Id
+# number_cores = 10
+# number_folds = 10
+# folderResults = "/dev/shm/res"
 ##################################################################################################
 
 

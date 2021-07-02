@@ -50,10 +50,10 @@ generateR2 <- function(namesLabels, number_folds, dataset_name, ds, folderResult
   
   diretorios = directories(dataset_name, folderResults)
   
-  cat("\nGet the total of partitions")
+  #cat("\nGet the total of partitions")
   num.particoes = ds$Labels - 1
   
-  f=1
+  f = 1
   rp2 <- foreach(f = 1:number_folds) %dopar%{  
     
     library("dplyr")
@@ -65,7 +65,7 @@ generateR2 <- function(namesLabels, number_folds, dataset_name, ds, folderResult
     }
     
     ############################################################################################################    
-    cat("\nCreate data frame to save results")
+    #cat("\nCreate data frame to save results")
     num.fold = c(0)
     num.part = c(0)
     num.group = c(0)
@@ -90,42 +90,45 @@ generateR2 <- function(namesLabels, number_folds, dataset_name, ds, folderResult
       dir.create(FolderSplit)
     } 
     
-    cat("\nFrom partition = 2 to the partition = l - 2")
+    #cat("\nFrom partition = 2 to the partition = l - 2")
     
     if(interactive()==TRUE){ flush.console() }
     
-    k = 2
+    p = 2
+    
+    k = 1
     while(k<=num.particoes){
       
-      cat("\n\tPartition = ", k)
+      cat("\n\tPartition = ", p)
       
-      cat("\nSpecifying folder")
-      FolderPartition = paste(FolderSplit, "/Partition-", k, sep="")
+      #cat("\nSpecifying folder")
+      FolderPartition = paste(FolderSplit, "/Partition-", p, sep="")
       if(dir.exists(FolderPartition)==FALSE){
         dir.create(FolderPartition)
       } 
       
-      cat("\nSorteia um número de grupos aleatoriamente")
+      #cat("\nSorteia um número de grupos aleatoriamente")
       num.grupos <- sample(2:(ds$Labels-1),1)
+      #cat("\n numero de grupos: ", num.grupos)
       
-      cat("\nCria uma particao aleatória")
+      #cat("\nCria uma particao aleatória")
       particao = sample(1:num.grupos, ds$Labels, replace = TRUE)
       
-      cat("\nGarante que todos os números sao sorteados (dummies)")
+      #cat("\nGarante que todos os números sao sorteados (dummies)")
       while(sum(1:num.grupos %in% particao) != num.grupos){
         particao <- sample(1:num.grupos, ds$Labels, replace = TRUE)
       }
       
-      cat("\nOrdena as partições e retorna os índices")
+      #cat("\nOrdena as partições e retorna os índices")
       particao.sorted <- sort(particao,index.return=TRUE)
       
-      cat("\nTRANSFORMA EM UM DATA FRAME")
+      #cat("\nTRANSFORMA EM UM DATA FRAME")
       particao2 = data.frame(particao.sorted)
       
-      cat("\nALTERA OS NOMES DAS COLUNAS DO DATA FRAME")
+      #cat("\nALTERA OS NOMES DAS COLUNAS DO DATA FRAME")
       names(particao2) = c("num.grupo","num.rotulo")
       
-      cat("\nCOLOCA A PARTIÇÃO EM EM ORDEM ALFABÉTICA")
+      #cat("\nCOLOCA A PARTIÇÃO EM EM ORDEM ALFABÉTICA")
       particao3 = particao2[order(particao2$num.grupo, decreasing = FALSE), ] 
       
       ordem.labels = sort(namesLabels, index.return = TRUE)
@@ -134,56 +137,58 @@ generateR2 <- function(namesLabels, number_folds, dataset_name, ds, folderResult
       
       names(rotulos) = c("names.labels","index")
       
-      cat("\nCOLOCA OS RÓTULOS EM ORDEM ALFABÉTICA")
+      #cat("\nCOLOCA OS RÓTULOS EM ORDEM ALFABÉTICA")
       rotulos2 = rotulos[order(rotulos$index, decreasing = FALSE), ] 
       
-      cat("\nASSOCIA OS RÓTULOS COM OS ÍNDICES E OS GRUPOS")
+      #cat("\nASSOCIA OS RÓTULOS COM OS ÍNDICES E OS GRUPOS")
       fold = f
-      num.part = k
+      num.part = p
+      num.grupos = num.grupos
       pFinal = data.frame(cbind(fold, num.grupos, num.part, particao3, rotulos2))
       
-      cat("\nSave specific partition")
+      #cat("\nSave specific partition")
       group = pFinal$num.grupo
       label = pFinal$names.labels
       pFinal2 = data.frame(group, label)
       setwd(FolderPartition)
-      write.csv(pFinal2, paste("partition-", k, ".csv", sep=""), row.names = FALSE)
+      write.csv(pFinal2, paste("partition-", p, ".csv", sep=""), row.names = FALSE)
       
-      cat("\nFrequencia")
+      #cat("\nFrequencia")
       library("dplyr")
       frequencia1 = count(pFinal2, pFinal2$group)
       names(frequencia1) = c("group", "totalLabels")
       setwd(FolderPartition)
-      write.csv(frequencia1, paste("fold-", f, "-labels-per-group-partition-", k, ".csv", sep=""), row.names = FALSE)
+      write.csv(frequencia1, paste("fold-", f, "-labels-per-group-partition-", p, ".csv", sep=""), row.names = FALSE)
       
-      cat("\nUpdate data frame")
+      #cat("\nUpdate data frame")
       num.fold = f
-      num.part = k
+      num.part = p
       num.group = pFinal$num.grupo
       names.labels = pFinal$names.labels
       num.index = pFinal$index
       AllPartitions = rbind(AllPartitions, 
                             data.frame(num.fold, num.part, num.group, names.labels, num.index))
       
-      cat("\nSave all partition in results dataset")
+      #cat("\nSave all partition in results dataset")
       setwd(FolderSplit)
       write.csv(AllPartitions[-1,], paste("fold-", f, "-all-partitions-v2.csv", sep=""), row.names = FALSE)
       
-      cat("\ntodas partições")
+      #cat("\ntodas partições")
       pFinal = pFinal[order(pFinal$names.labels, decreasing = FALSE),]
       nomesDosRotulos = pFinal$names.labels
       group = pFinal$num.grupo
       allPartitions2 = cbind(allPartitions2, group)
       b = k + 1
-      names(allPartitions2)[b] = paste("partition-", k, sep="")
+      names(allPartitions2)[b] = paste("partition-", p, sep="")
       
-      cat("\ngruops por particao")
+      #cat("\ngruops por particao")
       fold = f
-      partition = k
-      num.groups = k
+      partition = p
+      num.groups = num.grupos
       resumePartitions = rbind(resumePartitions, data.frame(fold, partition, num.groups))
       
-      k = k + 1
+      p = p + 1 # incrementa a partição
+      k = k + 1 # incrementa o grupo
       gc()
       
     } # fim da partição
