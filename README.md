@@ -1,7 +1,7 @@
 # Generate Random Partitions Version 2
 This code is part of my PhD at PPG-CC/DC/UFSCar. The aim is generate a specific type of random partition for multilabel classification.
 
-# Random Partitions Version 2
+## Random Partitions Version 2
 
 <img src="" width="100">
 
