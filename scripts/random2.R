@@ -182,7 +182,7 @@ save(results, file = str1)
 ########################################################################################################################
 #cat("\n Copy to google drive")
 #origem = diretorios$folderOutputDataset
-#destino = paste("cloud:elaine/[2021]ResultadosExperimentos/Generate-Partitions-Random2/Julho", dataset_name, sep="")
+#destino = paste("cloud:elaine/[2021]ResultadosExperimentos/Generate-Partitions-Random2/", dataset_name, sep="")
 #comando = paste("rclone -v copy ", origem, " ", destino, sep="")
 #print(system(comando))
 
@@ -194,9 +194,9 @@ save(results, file = str1)
 
 
 ##################################################################################################
-cat("\nDelete folder specific dataset \n")
-str7 = paste("rm -r ", diretorios$folderSpecificDataset, sep="")
-print(system(str7))
+#cat("\nDelete folder specific dataset \n")
+#str7 = paste("rm -r ", diretorios$folderSpecificDataset, sep="")
+#print(system(str7))
 
 
 rm(list = ls())
