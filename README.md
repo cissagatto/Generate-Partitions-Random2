@@ -2,7 +2,7 @@
 This code is part of my PhD at PPG-CC/DC/UFSCar. The aim is generate a specific type of random partition for multilabel classification.
 
 ## How to Cite
-@misc{Gatto2022, author = {Gatto, E. C.}, title = {Generate Random Partitions Version 2 for Multilabel Classification}, year = {2022}, publisher = {GitHub}, journal = {GitHub repository}, howpublished = {\url{https://github.com/cissagatto/Generate-Partitions-Randon2}}}
+@misc{Gatto2022, author = {Gatto, E. C.}, title = {Generate Random Partitions Version 2 for Multilabel Classification}, year = {2022}, publisher = {GitHub}, journal = {GitHub repository}, howpublished = {\url{https://github.com/cissagatto/Generate-Partitions-Random2}}}
 
 
 ## Types of Random Partitions
