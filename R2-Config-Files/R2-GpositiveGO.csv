@@ -1,0 +1,7 @@
+Config, Value
+Dataset_Path, ~/Generate-Partitions-Random2/Datasets
+Temporary_Path, /dev/shm/R2-GpositiveGO
+dataset_name, GpositiveGO
+number_dataset, 42
+number_folds, 10
+number_cores, 1

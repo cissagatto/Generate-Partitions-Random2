@@ -1,37 +1,31 @@
-##################################################################################################
-# Random Partitions Version 2                                                                    #
-# Copyright (C) 2021                                                                             #
-#                                                                                                #
-# This program is free software: you can redistribute it and/or modify it under the terms of the #
-# GNU General Public License as published by the Free Software Foundation, either version 3 of   #  
-# the License, or (at your option) any later version. This program is distributed in the hope    #
-# that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of         #
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for    #
-# more details.                                                                                  #     
-#                                                                                                #
-# Elaine Cecilia Gatto | Prof. Dr. Ricardo Cerri | Prof. Dr. Mauri Ferrandin                     #
-# Federal University of Sao Carlos (UFSCar: https://www2.ufscar.br/) Campus Sao Carlos           #
-# Computer Department (DC: https://site.dc.ufscar.br/)                                           #
-# Program of Post Graduation in Computer Science (PPG-CC: http://ppgcc.dc.ufscar.br/)            #
-# Bioinformatics and Machine Learning Group (BIOMAL: http://www.biomal.ufscar.br/)               #
-#                                                                                                #
-##################################################################################################
+##############################################################################
+# Generate Random Partitions version 2                                       #
+# Copyright (C) 2021                                                         #
+#                                                                            #
+# This code is free software: you can redistribute it and/or modify it under #
+# the terms of the GNU General Public License as published by the Free       #
+# Software Foundation, either version 3 of the License, or (at your option)  #
+# any later version. This code is distributed in the hope that it will be    #
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of     #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General   #
+# Public License for more details.                                           #
+#                                                                            #
+# Elaine Cecilia Gatto | Prof. Dr. Ricardo Cerri | Prof. Dr. Mauri           #
+# Ferrandin | Federal University of Sao Carlos                               #
+# (UFSCar: https://www2.ufscar.br/) Campus Sao Carlos | Computer Department  #
+# (DC: https://site.dc.ufscar.br/) | Program of Post Graduation in Computer  #
+# Science (PPG-CC: http://ppgcc.dc.ufscar.br/) | Bioinformatics and Machine  #
+# Learning Group (BIOMAL: http://www.biomal.ufscar.br/)                      #
+#                                                                            #
+##############################################################################
 
-##################################################################################################
-# Script 3 - Miscelaneous                                                                       #
-##################################################################################################
 
-##################################################################################################
-# Configures the workspace according to the operating system                                     #
-##################################################################################################
-sistema = c(Sys.info())
-FolderRoot = ""
-if (sistema[1] == "Linux"){
-  FolderRoot = paste("/home/", sistema[7], "/Generate-Partitions-Random2", sep="")
-} else {
-  FolderRoot = paste("C:/Users/", sistema[7], "/Generate-Partitions-Random2", sep="")
-}
-FolderScripts = paste(FolderRoot, "/scripts", sep="")
+###########################################################################
+#
+###########################################################################
+FolderRoot = "~/Generate-Partitions-Random2"
+FolderScripts = "~/Generate-Partitions-Random2/R"
+
 
 
 ##################################################################################################
@@ -46,7 +40,14 @@ FolderScripts = paste(FolderRoot, "/scripts", sep="")
 #   Return                                                                                       #
 #       configuration partitions                                                                 #
 ##################################################################################################
-generateR2 <- function(namesLabels, number_folds, dataset_name, ds, folderResults){
+generateR2 <- function(ds,
+                       dataset_name,
+                       number_dataset, 
+                       number_cores, 
+                       number_folds, 
+                       folderResults,
+                       namesLabels,
+                       resLS){
   
   diretorios = directories(dataset_name, folderResults)
   
@@ -56,7 +57,15 @@ generateR2 <- function(namesLabels, number_folds, dataset_name, ds, folderResult
   f = 1
   rp2 <- foreach(f = 1:number_folds) %dopar%{  
     
-    library("dplyr")
+    FolderRoot = "~/Generate-Partitions-Random2"
+    FolderScripts = "~/Generate-Partitions-Random2/R"
+    
+    
+    setwd(FolderScripts)
+    source("libraries.R")
+    
+    setwd(FolderScripts)
+    source("utils.R")
     
     cat("\nFold = ", f)
     if(interactive()==TRUE){ 
