@@ -127,13 +127,13 @@ The results stored in the folder _OUTPUT_ it will be used in the next phase: Bes
 To run the code, open the terminal, enter the *~/Generate-Partitions-Random2/R* folder, and type
 
 ```
-Rscript random1.R [absolute_path_to_config_file]
+Rscript random2.R [absolute_path_to_config_file]
 ```
 
 Example:
 
 ```
-Rscript random1.R "~/Generate-Partitions-Random2/R2-Config-Files/R2-GpositiveGO.csv"
+Rscript random2.R "~/Generate-Partitions-Random2/R2-Config-Files/R2-GpositiveGO.csv"
 ```
 
 ## RESULTS
