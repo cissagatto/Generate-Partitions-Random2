@@ -15,8 +15,8 @@ This code source is composed of the project R to be used in RStudio IDE and also
 2. utils.R
 3. generateR1.R
 4. run.R
-5. random1.R
-6. gpr1_config_files.R
+5. random2.R
+6. gpr2_config_files.R
 
 
 ## Preparing your experiment
